@@ -1,95 +1,96 @@
 # Freshly 🛒
-
-An online grocery shop with home delivery — browse products, fill your cart, and check out. I built this for the Advanced Programming course at Thomas More, and designed it before writing any code — the full analysis is at the bottom.
-
-**[▶ Try the live demo](https://grocery-delivery-webapp-spring-2.onrender.com/)**
-<sub>Free hosting — the first load can take ~50 seconds while the server wakes up.</sub>
-
-<!-- TODO: add a real screenshot (homepage or cart view) as images/app-screenshot.png -->
-![Freshly screenshot](images/app-screenshot.png)
-
-## What it does
-
-- Browse products, add them to a cart, and check out
-- Spring MVC controllers with a JPA data model
-  <!-- If your code has a separate service layer between controllers and
-       repositories, say so — it's a plus. If controllers talk straight to
-       repositories, leave this line as is. Don't claim the layer you don't have. -->
-- Server-side form validation
-- Runs with an embedded H2 database — clone and run, no database setup
-- Multi-stage Docker build, deployed on Render
-  <!-- Keep this line only once you can explain WHY two stages:
-       build stage = Maven + full JDK (big), runtime stage = just the jar on a
-       slim JRE image (small). If you'd rather not defend it yet, change to:
-       "Dockerized and deployed on Render" -->
-
+ 
+Een online supermarkt met thuislevering — blader door producten, vul je winkelmand en reken af. Ik bouwde dit voor het vak Advanced Programming aan Thomas More, en ontwierp het volledig voor ik één lijn code schreef — de volledige analyse vind je onderaan.
+ 
+**[▶ Probeer de live demo](https://grocery-delivery-webapp-spring-2.onrender.com/)**
+<sub>Gratis hosting — de eerste keer laden kan ~50 seconden duren terwijl de server wakker wordt.</sub>
+ 
+<!-- TODO: voeg een echte screenshot toe (homepagina of winkelmand) als images/app-screenshot.png -->
+![Screenshot van Freshly](images/app-screenshot.png)
+ 
+## Wat het doet
+ 
+- Producten bekijken, toevoegen aan de winkelmand en afrekenen
+- Spring MVC-controllers met een JPA-datamodel
+  <!-- Heeft je code een aparte service-laag tussen controllers en repositories?
+       Vermeld dat dan — het is een pluspunt. Praten je controllers rechtstreeks
+       met repositories, laat deze lijn dan zo staan. Claim geen laag die je
+       niet hebt. -->
+- Server-side formuliervalidatie
+- Draait op een embedded H2-database — clonen en runnen, geen databasesetup nodig
+- Multi-stage Docker build, gedeployed op Render
+  <!-- Hou deze lijn enkel als je kan uitleggen WAAROM twee stages:
+       build stage = Maven + volledige JDK (groot image), runtime stage = enkel
+       de jar op een slank JRE-image (klein). Wil je dit nog niet verdedigen,
+       verander dan naar: "Gedockerized en gedeployed op Render" -->
 ## Tech stack
-
+ 
 Java 24 · Spring Boot 4 (Web MVC, Data JPA, Thymeleaf, Validation) · H2 · Docker
-
-## Run it locally
-
-**Prerequisites:** Java 24 — that's it. The Maven wrapper and embedded database handle the rest.
-
+ 
+## Lokaal draaien
+ 
+**Vereisten:** Java 24 — meer niet. De Maven wrapper en de embedded database doen de rest.
+ 
 ```bash
 git clone https://github.com/pasang-code/freshly-groceries.git
 cd freshly-groceries
 ./mvnw spring-boot:run        # Windows: mvnw.cmd spring-boot:run
 ```
-
-Or with Docker (no Java install needed):
-
+ 
+Of met Docker (geen Java-installatie nodig):
+ 
 ```bash
 docker build -t freshly .
 docker run -p 8080:8080 freshly
 ```
-
-The app runs at `http://localhost:8080`.
-
-## What I learned
-
-<!-- Write 3-5 short bullets IN YOUR OWN WORDS. This is the section recruiters
-     trust most, precisely because AI can't know it. Prompts to jog you:
-     - What took embarrassingly long before it clicked? (JPA relations? Thymeleaf forms?)
-     - What would you build differently next time?
-     - What broke when you deployed to Render that worked locally?
-     Rough sentences beat polished ones here. Delete this comment after. -->
-
-## Design & documentation
-
-I designed the project before building it — user story map, domain model, wireframes and UML below.
-
-### Product description
-
-A local supermarket wants to extend its services with an online ordering and delivery platform, aimed at busy city residents — working professionals, families and elderly customers — who want convenient access to fresh groceries without visiting the store.
-
+ 
+De app draait op `http://localhost:8080`.
+ 
+## Wat ik geleerd heb
+ 
+<!-- Schrijf 3-5 korte bullets IN JE EIGEN WOORDEN. Dit is de sectie die
+     recruiters het meest vertrouwen, net omdat AI ze niet voor jou kan kennen.
+     Vragen om je op weg te helpen:
+     - Wat duurde gênant lang voor het klikte? (JPA-relaties? Thymeleaf-formulieren?)
+     - Wat zou je de volgende keer anders aanpakken?
+     - Wat brak er bij het deployen naar Render dat lokaal wél werkte?
+     Ruwe zinnen zijn hier beter dan gepolijste. Verwijder deze comment achteraf. -->
+ 
+## Ontwerp & documentatie
+ 
+Ik ontwierp het project voor ik het bouwde — user story map, conceptueel model, wireframes en UML-diagrammen hieronder.
+ 
+### Productbeschrijving
+ 
+Een lokale supermarkt wil haar diensten uitbreiden door een online platform met bezorgservice te ontwikkelen, waarmee klanten hun boodschappen digitaal kunnen bestellen en thuis laten leveren. Deze service is bedoeld voor stadsbewoners, in het bijzonder mensen met een drukke levensstijl, zoals werkende professionals, gezinnen en ouderen, die op een gemakkelijke manier toegang willen tot verse voeding zonder zelf naar de winkel te moeten gaan. Door deze uitbreiding kan de supermarkt haar digitale aanwezigheid vergroten en een nieuwe inkomstenbron creëren, terwijl klanten tijd besparen en genieten van het gemak en de flexibiliteit van thuislevering, met blijvende toegang tot kwalitatieve en verse producten.
+ 
 ### User story map
-
+ 
 ![User story map](images/storymap.png)
-
-### Conceptual model
-
-![Conceptual model](images/conceptueelmodelsimpel.png)
-
+ 
+### Conceptueel model
+ 
+![Conceptueel model](images/conceptueelmodelsimpel.png)
+ 
 ### Wireframes
-
-<!-- TODO: check these labels match what the wireframes actually show -->
+ 
+<!-- TODO: check of deze labels kloppen met wat de wireframes echt tonen -->
 ![Wireframe 1](images/wf1.png)
 ![Wireframe 2](images/wf2.png)
-
+ 
 ### Use-case diagram
-
+ 
 ![Use-case diagram](images/usecases2.png)
-
+ 
 ### Activity diagrams
-
+ 
 ![Activity diagram 1](images/activity1.png)
 ![Activity diagram 2](images/activity2.webp)
-
+ 
 ### Sequence diagram
-
+ 
 ![Sequence diagram](images/sequence-diagram.png)
-
+ 
 ### Class diagram
-
+ 
 ![Class diagram](images/klassediagram.png)
