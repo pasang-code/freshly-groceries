@@ -1,29 +1,95 @@
-# grocery-delivery-webapp-spring
+# Freshly 🛒
 
-## 1. Product bescrijving.
+An online grocery shop with home delivery — browse products, fill your cart, and check out. I built this for the Advanced Programming course at Thomas More, and designed it before writing any code — the full analysis is at the bottom.
 
-Een lokale supermarkt wil haar diensten uitbreiden door een online platform met bezorgservice te ontwikkelen, waarmee klanten hun boodschappen digitaal kunnen bestellen en thuis laten leveren. Deze service is bedoeld voor stadsbewoners, in het bijzonder mensen met een drukke levensstijl, zoals werkende professionals, gezinnen en ouderen, die op een gemakkelijke manier toegang willen tot verse voeding zonder zelf naar de winkel te moeten gaan. Door deze uitbreiding kan de supermarkt haar digitale aanwezigheid vergroten en een nieuwe inkomstenbron creëren, terwijl klanten tijd besparen en genieten van het gemak en de flexibiliteit van thuislevering, met blijvende toegang tot kwalitatieve en verse producten.
+**[▶ Try the live demo](https://grocery-delivery-webapp-spring-2.onrender.com/)**
+<sub>Free hosting — the first load can take ~50 seconds while the server wakes up.</sub>
 
-## 2. User story mapping
-![userStoryMapping](images/storymap.png)
+<!-- TODO: add a real screenshot (homepage or cart view) as images/app-screenshot.png -->
+![Freshly screenshot](images/app-screenshot.png)
 
+## What it does
 
-## 4. Conceptueel model
-![conceptueelModel2](images/conceptueelmodelsimpel.png)
+- Browse products, add them to a cart, and check out
+- Spring MVC controllers with a JPA data model
+  <!-- If your code has a separate service layer between controllers and
+       repositories, say so — it's a plus. If controllers talk straight to
+       repositories, leave this line as is. Don't claim the layer you don't have. -->
+- Server-side form validation
+- Runs with an embedded H2 database — clone and run, no database setup
+- Multi-stage Docker build, deployed on Render
+  <!-- Keep this line only once you can explain WHY two stages:
+       build stage = Maven + full JDK (big), runtime stage = just the jar on a
+       slim JRE image (small). If you'd rather not defend it yet, change to:
+       "Dockerized and deployed on Render" -->
 
-## 5. Wireframes
-![wireframe main page](images/wf1.png)
-![wireframe main page](images/wf2.png)
+## Tech stack
 
-## 6. Use-case diagram
-![Use-case-diagram](images/usecases2.png)
+Java 24 · Spring Boot 4 (Web MVC, Data JPA, Thymeleaf, Validation) · H2 · Docker
 
-## 7. Activity diagram
-![Activity-diagram1](images/activity1.png)
-![Activity-diagram1](images/activity2.webp)
+## Run it locally
 
-## 8. Sequence diagram
-![Sequence-diagram](images/sequence-diagram.png)
+**Prerequisites:** Java 24 — that's it. The Maven wrapper and embedded database handle the rest.
 
-## 9. Class diagram
-![Class-diagram](images/klassediagram.png)
+```bash
+git clone https://github.com/pasang-code/freshly-groceries.git
+cd freshly-groceries
+./mvnw spring-boot:run        # Windows: mvnw.cmd spring-boot:run
+```
+
+Or with Docker (no Java install needed):
+
+```bash
+docker build -t freshly .
+docker run -p 8080:8080 freshly
+```
+
+The app runs at `http://localhost:8080`.
+
+## What I learned
+
+<!-- Write 3-5 short bullets IN YOUR OWN WORDS. This is the section recruiters
+     trust most, precisely because AI can't know it. Prompts to jog you:
+     - What took embarrassingly long before it clicked? (JPA relations? Thymeleaf forms?)
+     - What would you build differently next time?
+     - What broke when you deployed to Render that worked locally?
+     Rough sentences beat polished ones here. Delete this comment after. -->
+
+## Design & documentation
+
+I designed the project before building it — user story map, domain model, wireframes and UML below.
+
+### Product description
+
+A local supermarket wants to extend its services with an online ordering and delivery platform, aimed at busy city residents — working professionals, families and elderly customers — who want convenient access to fresh groceries without visiting the store.
+
+### User story map
+
+![User story map](images/storymap.png)
+
+### Conceptual model
+
+![Conceptual model](images/conceptueelmodelsimpel.png)
+
+### Wireframes
+
+<!-- TODO: check these labels match what the wireframes actually show -->
+![Wireframe 1](images/wf1.png)
+![Wireframe 2](images/wf2.png)
+
+### Use-case diagram
+
+![Use-case diagram](images/usecases2.png)
+
+### Activity diagrams
+
+![Activity diagram 1](images/activity1.png)
+![Activity diagram 2](images/activity2.webp)
+
+### Sequence diagram
+
+![Sequence diagram](images/sequence-diagram.png)
+
+### Class diagram
+
+![Class diagram](images/klassediagram.png)
