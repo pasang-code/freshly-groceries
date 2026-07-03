@@ -46,16 +46,6 @@ docker run -p 8080:8080 freshly
  
 De app draait op `http://localhost:8080`.
  
-## Wat ik geleerd heb
- 
-<!-- Schrijf 3-5 korte bullets IN JE EIGEN WOORDEN. Dit is de sectie die
-     recruiters het meest vertrouwen, net omdat AI ze niet voor jou kan kennen.
-     Vragen om je op weg te helpen:
-     - Wat duurde gênant lang voor het klikte? (JPA-relaties? Thymeleaf-formulieren?)
-     - Wat zou je de volgende keer anders aanpakken?
-     - Wat brak er bij het deployen naar Render dat lokaal wél werkte?
-     Ruwe zinnen zijn hier beter dan gepolijste. Verwijder deze comment achteraf. -->
- 
 ## Ontwerp & documentatie
  
 Ik ontwierp het project voor ik het bouwde — user story map, conceptueel model, wireframes en UML-diagrammen hieronder.
