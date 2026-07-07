@@ -6,7 +6,7 @@ Een online supermarkt met thuislevering — blader door producten, vul je winkel
 <sub>Gratis hosting — de eerste keer laden kan ~50 seconden duren terwijl de server wakker wordt.</sub>
  
 <!-- TODO: voeg een echte screenshot toe (homepagina of winkelmand) als images/app-screenshot.png -->
-![Screenshot van Freshly](images/app-screenshot.png)
+![Screenshot van Freshly](images/images/Schermafbeelding 2026-07-07 124442.png)
  
 ## Wat het doet
  
