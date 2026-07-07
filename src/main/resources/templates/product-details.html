@@ -1,117 +1,118 @@
-<!doctype html>
-<html lang="en">
-<head th:replace="~{fragments/header::head}"></head>
-<body style="background-color: #f4f6f0;">
+    <!doctype html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="~{fragments/header::head}"></head>
+    <body style="background-color: #f4f6f0;">
 
-<header th:insert="~{fragments/navbar::navigationBar}"></header>
+    <header th:insert="~{fragments/navbar::navigationBar}"></header>
 
-<main th:if="${product}" th:object="${product}">
+    <main th:if="${product}" th:object="${product}">
 
-    <!-- BREADCRUMB / TOOLBAR -->
-    <div  class="py-2 px-3 bg-success">
-        <div class="container-fluid d-flex align-items-center justify-content-between gap-2 flex-wrap">
-            <a class="btn btn-outline-light btn-sm" th:href="@{/home}">← Terug</a>
-            <div class="d-flex gap-2">
-                <input type="search" class="form-control form-control-sm" placeholder="Zoeken...">
-                <button class="btn btn-warning btn-sm text-nowrap">Zoeken</button>
-            </div>
-            <div class="d-flex gap-2">
-                <a class="btn btn-outline-light btn-sm"
-                   th:href="@{/product-details/{id}(id=${product.id - 1})}">← Vorige</a>
-                <a class="btn btn-outline-light btn-sm"
-                   th:href="@{/product-details/{id}(id=${product.id + 1})}">Volgende →</a>
+        <!-- BREADCRUMB / TOOLBAR -->
+        <div  class="py-2 px-3 bg-success">
+            <div class="container-fluid d-flex align-items-center justify-content-between gap-2 flex-wrap">
+                <a class="btn btn-outline-light btn-sm" th:href="@{/home}">← Terug</a>
+                <div class="d-flex gap-2">
+                    <input type="search" class="form-control form-control-sm" placeholder="Zoeken...">
+                    <button class="btn btn-warning btn-sm text-nowrap">Zoeken</button>
+                </div>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-outline-light btn-sm"
+                       th:href="@{/product-details/{id}(id=${product.id - 1})}">← Vorige</a>
+                    <a class="btn btn-outline-light btn-sm"
+                       th:href="@{/product-details/{id}(id=${product.id + 1})}">Volgende →</a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container py-4 px-3">
-        <div class="row g-4 align-items-start">
+        <div class="container py-4 px-3">
+            <div class="row g-4 align-items-start">
 
-            <!-- PRODUCT IMAGE -->
-            <div class="col-12 col-md-5">
-                <div class="rounded-3 overflow-hidden border-0 shadow-sm" style="background: #fff;">
-                    <img th:src="*{imageUrl}"  alt="product"
-                         class="w-100" style="object-fit: cover; max-height: 380px;">
-                </div>
-
-                <!-- Category badges under image -->
-                <div class="d-flex flex-wrap gap-2 mt-3"
-                     th:if="${#lists.size(product.categories) > 0}">
-                    <a th:each="category : ${product.categories}"
-                          class="badge rounded-pill px-3 py-2 text-decoration-none"
-                          style="background-color: #e8793a; font-size: 0.8rem;"
-                          th:text="${category.name}" th:href="@{/category-details/{id}(id=${category.id})}"></a>
-                </div>
-            </div>
-
-            <!-- PRODUCT INFO -->
-            <div class="col-12 col-md-7">
-                <div class="bg-white rounded-3 shadow-sm p-4">
-
-                    <!-- Brand link -->
-                    <div class="d-flex">
-                    <a th:href="@{/brand-details/{id}(id=*{brand.id})}"
-                       class="text-decoration-none small fw-semibold border rounded-pill bg-warning px-3 py-2 "
-                       style="color: #2d6a2d;"
-                       th:text="*{brand.name}"></a>
-
-                    <a class="btn btn-danger text-white text-decoration-none rounded-3 ms-auto" th:href="@{/admin/product-details-edit/{id}(id=${product.id})}">Edit</a>
+                <!-- PRODUCT IMAGE -->
+                <div class="col-12 col-md-5">
+                    <div class="rounded-3 overflow-hidden border-0 shadow-sm" style="background: #fff;">
+                        <img th:src="*{imageUrl}"  alt="product"
+                             class="w-100" style="object-fit: cover; max-height: 380px;">
                     </div>
-                    <h1 class="fs-3 fw-bold mt-3 mb-1" th:text="*{productName}"></h1>
 
-                    <!-- Organic badge -->
-                    <span th:if="*{organic}"
-                          class="badge mb-2"
-                          style="background-color: #2d6a2d;">Biologisch</span>
-
-                    <!-- Price -->
-                    <div class="my-3">
-                        <span class="fs-2 fw-bold" style="color: #2d6a2d;"
-                              th:text="|€ *{price}|"></span>
+                    <!-- Category badges under image -->
+                    <div class="d-flex flex-wrap gap-2 mt-3"
+                         th:if="${#lists.size(product.categories) > 0}">
+                        <a th:each="category : ${product.categories}"
+                              class="badge rounded-pill px-3 py-2 text-decoration-none"
+                              style="background-color: #e8793a; font-size: 0.8rem;"
+                              th:text="${category.name}" th:href="@{/category-details/{id}(id=${category.id})}"></a>
                     </div>
-                    <form method="post" action="/shopping-cart-add">
-                    <!-- Add to cart -->
-                        <label for="aantal">aantal:</label>
-                        <input type="number" name="quantity" min="1" value="1" id="aantal" class="rounded-1 mb-2 text-center" style="max-width: 10%" th:classappend="(${invalidInput})?'border border-danger':''">
-                        <span th:if="${invalidInput}" class=" px-3 py-2 bg-danger text-white">Geen geldige aantal</span>
-                        <input type="hidden" th:value="${product.id}" name="productId">
-                    <button class="btn fw-semibold w-100 mb-4 text-white"
-                            style="background-color: #2d6a2d;" type="submit">
-                        Toevoegen aan winkelmandje
-                    </button>
-
-                    </form>
-                    <hr>
-
-                    <!-- Description -->
-                    <h6 class="fw-semibold text-muted text-uppercase small mb-1">Omschrijving</h6>
-                    <p class="mb-3" th:text="*{description}"></p>
-
-                    <!-- Weight -->
-                    <h6 class="fw-semibold text-muted text-uppercase small mb-1">Gewicht</h6>
-                    <p class="mb-0" th:text="|*{weight} g|"></p>
-
                 </div>
-            </div>
 
+                <!-- PRODUCT INFO -->
+                <div class="col-12 col-md-7">
+                    <div class="bg-white rounded-3 shadow-sm p-4">
+
+                        <!-- Brand link -->
+                        <div class="d-flex">
+                        <a th:href="@{/brand-details/{id}(id=*{brand.id})}"
+                           class="text-decoration-none small fw-semibold border rounded-pill bg-warning px-3 py-2 "
+                           style="color: #2d6a2d;"
+                           th:text="*{brand.name}"></a>
+
+
+                        <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-danger text-white text-decoration-none rounded-3 ms-auto" th:href="@{/admin/product-details-edit/{id}(id=${product.id})}">Edit</a>
+                        </div>
+                        <h1 class="fs-3 fw-bold mt-3 mb-1" th:text="*{productName}"></h1>
+
+                        <!-- Organic badge -->
+                        <span th:if="*{organic}"
+                              class="badge mb-2"
+                              style="background-color: #2d6a2d;">Biologisch</span>
+
+                        <!-- Price -->
+                        <div class="my-3">
+                            <span class="fs-2 fw-bold" style="color: #2d6a2d;"
+                                  th:text="|€ *{price}|"></span>
+                        </div>
+                        <form method="post" th:action="@{/shopping-cart-add}">
+                        <!-- Add to cart -->
+                            <label for="aantal">aantal:</label>
+                            <input type="number" name="quantity" min="1" value="1" id="aantal" class="rounded-1 mb-2 text-center" style="max-width: 10%" th:classappend="(${invalidInput})?'border border-danger':''">
+                            <span th:if="${invalidInput}" class=" px-3 py-2 bg-danger text-white">Geen geldige aantal</span>
+                            <input type="hidden" th:value="${product.id}" name="productId">
+                        <button class="btn fw-semibold w-100 mb-4 text-white"
+                                style="background-color: #2d6a2d;" type="submit">
+                            Toevoegen aan winkelmandje
+                        </button>
+
+                        </form>
+                        <hr>
+
+                        <!-- Description -->
+                        <h6 class="fw-semibold text-muted text-uppercase small mb-1">Omschrijving</h6>
+                        <p class="mb-3" th:text="*{description}"></p>
+
+                        <!-- Weight -->
+                        <h6 class="fw-semibold text-muted text-uppercase small mb-1">Gewicht</h6>
+                        <p class="mb-0" th:text="|*{weight} g|"></p>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
 
-</main>
+    </main>
 
-<main th:unless="${product}" class="container py-5 text-center">
-    <h4 class="text-muted">Geen geldig product geselecteerd.</h4>
-    <a class="btn mt-3 text-white" style="background-color: #2d6a2d;" th:href="@{/home}">
-        Terug naar overzicht
-    </a>
-</main>
+    <main th:unless="${product}" class="container py-5 text-center">
+        <h4 class="text-muted">Geen geldig product geselecteerd.</h4>
+        <a class="btn mt-3 text-white" style="background-color: #2d6a2d;" th:href="@{/home}">
+            Terug naar overzicht
+        </a>
+    </main>
 
-<footer class="py-3 text-center small border-top" style="color: #6c6c6c;">
-    &copy; 2026 GroceryDelivery &mdash; Vers aan je deur
-</footer>
+    <footer class="py-3 text-center small border-top" style="color: #6c6c6c;">
+        &copy; 2026 GroceryDelivery &mdash; Vers aan je deur
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+    </body>
+    </html>
