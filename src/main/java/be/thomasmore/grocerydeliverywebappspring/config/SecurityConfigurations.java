@@ -51,7 +51,7 @@ public class SecurityConfigurations {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
 //only user with admin role can acccess requests that start with /admin/ :
-                .requestMatchers("/admin/**").hasRole("admin")
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
 //all other requests can be executed by anyone:
                 .anyRequest().permitAll());
         http.formLogin(withDefaults());

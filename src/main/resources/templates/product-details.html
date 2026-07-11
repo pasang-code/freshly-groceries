@@ -72,22 +72,19 @@
         <!-- PRODUCT INFO -->
         <div class="col-12 col-md-7">
 
-            <!-- Brand -->
-            <a th:href="@{/brand-details/{id}(id=*{brand.id})}"
-               class="text-decoration-none text-uppercase fw-bold d-inline-block mb-2"
-               style="font-size: 0.72rem; letter-spacing: 0.08em; color: #4a8b6f;"
-               th:text="*{brand.name}"></a>
+            <!-- Brand + admin edit -->
+            <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                <a th:href="@{/brand-details/{id}(id=*{brand.id})}"
+                   class="text-decoration-none text-uppercase fw-bold"
+                   style="font-size: 0.72rem; letter-spacing: 0.08em; color: #4a8b6f;"
+                   th:text="*{brand.name}"></a>
+
+                <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-sm rounded-3 fw-semibold"
+                   style="background-color: #fbecea; color: #b23a2e;"
+                   th:href="@{/admin/product-details-edit/{id}(id=${product.id})}">Bewerken</a>
+            </div>
 
             <h1 class="fw-bold mb-2" style="font-size: 2.1rem; color: #1f2a24; line-height: 1.15;" th:text="*{productName}"></h1>
-
-            <!-- Biologisch + categorieën -->
-            <div class="d-flex flex-wrap gap-2 mb-3">
-                <span th:if="*{organic}" class="rounded-pill px-3 py-1 fw-semibold" style="background-color: #e3efe8; color: #2d6a4f; font-size: 0.8rem;">Biologisch</span>
-                <a th:each="category : ${product.categories}"
-                   class="rounded-pill px-3 py-1 fw-semibold text-decoration-none"
-                   style="background-color: #eef4f0; color: #4a8b6f; font-size: 0.8rem;"
-                   th:text="${category.name}" th:href="@{/category-details/{id}(id=${category.id})}"></a>
-            </div>
 
             <!-- Price -->
             <div class="d-flex align-items-baseline gap-2 mb-4">
@@ -124,9 +121,19 @@
                 <span class="fw-semibold" style="color: #1f2a24;" th:text="|*{weight} g|"></span>
             </div>
 
-            <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-sm rounded-3 mt-3 fw-semibold"
-               style="background-color: #fbecea; color: #b23a2e;"
-               th:href="@{/admin/product-details-edit/{id}(id=${product.id})}">Bewerken</a>
+
+            <!-- Biologisch + categorieën -->
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                <span th:if="*{organic}" class="rounded-pill px-3 py-1 fw-semibold" style="background-color: #e3efe8; color: #2d6a4f; font-size: 0.8rem;">Biologisch</span>
+                <a th:each="category : ${product.categories}"
+                   class="rounded-pill px-3 py-1 fw-semibold text-decoration-none"
+                   style="background-color: #eef4f0; color: #4a8b6f; font-size: 0.8rem;"
+                   th:text="${category.name}" th:href="@{/category-details/{id}(id=${category.id})}"></a>
+
+
+            </div>
+
+
 
         </div>
 
