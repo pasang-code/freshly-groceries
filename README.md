@@ -1,14 +1,11 @@
-# Freshly 🛒
+![Screenshot van Freshly](images/logo.png)
  
 Een online supermarkt met thuislevering — blader door producten, vul je winkelmand en reken af. Ik bouwde dit voor het vak Advanced Programming aan Thomas More, en ontwierp het volledig voor ik één lijn code schreef — de volledige analyse vind je onderaan.
  
-**[▶ Probeer de live demo](https://grocery-delivery-webapp-spring-2.onrender.com/)**
-<sub>Gratis hosting — de eerste keer laden kan ~50 seconden duren terwijl de server wakker wordt.</sub>
+**[Probeer de live demo](https://grocery-delivery-webapp-spring-2.onrender.com/)**
+<sub> Gratis hosting (de eerste keer laden kan ~50 seconden duren terwijl de server wakker wordt.)</sub>
  
-<!-- TODO: voeg een echte screenshot toe (homepagina of winkelmand) als images/app-screenshot.png -->
-![Screenshot van Freshly](images/logo.png)
- 
-## Wat het doet
+## Features
  
 - Producten bekijken, toevoegen aan de winkelmand en afrekenen
 - Spring MVC-controllers met een JPA-datamodel
@@ -23,7 +20,7 @@ Een online supermarkt met thuislevering — blader door producten, vul je winkel
        build stage = Maven + volledige JDK (groot image), runtime stage = enkel
        de jar op een slank JRE-image (klein). Wil je dit nog niet verdedigen,
        verander dan naar: "Gedockerized en gedeployed op Render" -->
-## Tech stack
+## Stack
  
 Java 24 · Spring Boot 4 (Web MVC, Data JPA, Thymeleaf, Validation) · H2 · Docker
  
@@ -46,7 +43,7 @@ docker run -p 8080:8080 freshly
  
 De app draait op `http://localhost:8080`.
  
-## Ontwerp & documentatie
+## Documentatie
  
 Ik ontwierp het project voor ik het bouwde — user story map, conceptueel model, wireframes en UML-diagrammen hieronder.
  
@@ -65,7 +62,6 @@ Een lokale supermarkt wil haar diensten uitbreiden door een online platform met 
 ### Wireframes
  
 <!-- TODO: check of deze labels kloppen met wat de wireframes echt tonen -->
-![Wireframe 1](images/wf1.png)
 ![Wireframe 2](images/wf2.png)
  
 ### Use-case diagram
