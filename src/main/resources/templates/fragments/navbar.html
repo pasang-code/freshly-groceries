@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success"
-     th:fragment="navigationBar">
+     th:fragment="navigationBar" xmlns:sec="http://www.w3.org/1999/xhtml">
 
     <div class="container-fluid px-3 px-md-4">
 
@@ -24,9 +24,13 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link rounded-2" th:href="@{/login}">Inloggen</a>
+                    <a  sec:authorize="!isAuthenticated()" class="nav-link rounded-2" th:href="@{/login}">Inloggen</a>
                 </li>
 
+                <li class="nav-item">
+                    <a sec:authorize="isAuthenticated()" class="nav-link rounded-2" th:href="@{/logout}">Uitloggen</a>
+                </li>
+                
                 <li class="nav-item ms-lg-2">
                     <a class="btn btn-warning btn-sm fw-semibold px-3 rounded-3" th:href="@{/shopping-cart}">
                         🛒 Winkelmandje
