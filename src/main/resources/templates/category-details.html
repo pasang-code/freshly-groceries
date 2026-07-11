@@ -1,37 +1,64 @@
 <!doctype html>
-<html lang="en">
-<head th:replace="~{fragments/header::head}">
+<html lang="nl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categoriedetails</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      body { font-family: 'Figtree', sans-serif; font-size: 0.95rem; line-height: 1.6; color: #3d4a43; }
+      h1, h5, h6, .navbar-brand, .btn { font-family: 'Quicksand', sans-serif; }
+      p, label, .form-label, small { letter-spacing: 0.01em; }
+      .fw-semibold, .fw-bold { font-variant-numeric: tabular-nums; }
+    </style>
 </head>
 <body class="bg-light">
 
-<header th:insert="~{fragments/navbar::navigationBar}"></header>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm" style="margin-bottom: 16px;">
+    <div class="container-fluid px-3 px-md-4">
+        <a class="navbar-brand fw-bold fs-4" th:href="@{/home}" style="color: #4a8b6f;">🌿 Freshly</a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapselist">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapselist">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                <li class="nav-item"><a class="nav-link rounded-2 text-dark" th:href="@{/home}" style="color: #4a8b6f;">Home</a></li>
+                <li class="nav-item"><a class="nav-link rounded-2 text-dark" href="#">Favorieten</a></li>
+                <li class="nav-item"><a sec:authorize="!isAuthenticated()" class="nav-link rounded-2 text-dark" th:href="@{/login}">Inloggen</a></li>
+                <li class="nav-item"><a sec:authorize="isAuthenticated()" class="nav-link rounded-2 text-dark" th:href="@{/logout}">Uitloggen</a></li>
+                <li class="nav-item ms-lg-2">
+                    <a class="btn btn-sm fw-semibold px-3 rounded-3" style="background-color: #e3efe8; color: #2d6a4f;" th:href="@{/shopping-cart}">🛒 Winkelmandje</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <main th:if="${category}" th:object="${category}">
 
-    <!-- TOOLBAR -->
-    <div class="py-2 px-3 bg-success">
-        <div class="container-fluid d-flex align-items-center justify-content-between gap-2 flex-wrap">
-            <a class="btn btn-outline-light btn-sm rounded-3" th:href="@{/home}">← Terug</a>
-            <div class="d-flex gap-2">
-                <a class="btn btn-outline-light btn-sm rounded-3"
+    <div class="container-fluid px-3 px-md-4 pt-2">
+
+        <!-- TOOLBAR -->
+        <div class="bg-white rounded-3 shadow-sm px-3 py-2 d-flex align-items-center justify-content-between gap-2 flex-wrap mb-4">
+            <a class="btn btn-link text-decoration-none fw-semibold px-2" style="color: #4a8b6f;" th:href="@{/home}">← Terug</a>
+            <div class="d-flex gap-1">
+                <a class="btn btn-link text-decoration-none fw-semibold px-2" style="color: #4a8b6f;"
                    th:href="@{/category-details/{id}(id=${category.id}-1)}">← Vorige</a>
-                <a class="btn btn-outline-light btn-sm rounded-3"
-                   th:href="@{/category-details/{id}(id=${category.id}+1)}">Volgende →</a>
+                <a class="btn btn-link text-decoration-none fw-semibold px-2 d-inline-flex align-items-center gap-1" style="color: #4a8b6f;"
+                   th:href="@{/category-details/{id}(id=${category.id}+1)}">Volgende
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
             </div>
         </div>
-    </div>
 
-    <div class="container-fluid px-3 px-md-4 py-4">
         <div class="row g-4 align-items-start">
 
             <!-- CATEGORY IMAGE -->
             <div class="col-12 col-md-4">
                 <div class="bg-white rounded-3 shadow-sm overflow-hidden">
                     <img th:src="@{*{imageUrl}}"
-                         src="https://placehold.co/600x400/e8f5e9/2d6a4f?font=open-sans&text=Categorie"
+                         src="https://placehold.co/600x400/e3efe8/2d6a4f?font=open-sans&amp;text=Categorie"
                          alt="Categorie"
                          class="w-100 object-fit-cover" style="aspect-ratio: 4/3;">
                 </div>
@@ -42,26 +69,26 @@
                 <div class="bg-white rounded-3 shadow-sm p-4">
 
                     <span th:if="*{featured}"
-                          class="badge mb-2"
-                          style="background-color: #e8793a;">Uitgelicht</span>
+                          class="badge mb-2 fw-semibold rounded-pill px-3 py-2"
+                          style="background-color: #2d6a4f;">Uitgelicht</span>
 
-                    <h1 class="fw-bold mb-1" th:text="*{name}"></h1>
-                    <p class="text-muted mb-4" th:text="*{description}"></p>
+                    <h1 class="fw-bold mb-1" style="color: #2d6a4f;" th:text="*{name}"></h1>
+                    <p class="text-secondary mb-4" th:text="*{description}"></p>
 
-                    <h6 class="fw-bold text-uppercase text-secondary small mb-3">Producten in deze categorie</h6>
+                    <h6 class="fw-bold text-uppercase mb-3" style="font-size: 0.72rem; letter-spacing: 0.06em; color: #4a8b6f;">Producten in deze categorie</h6>
 
                     <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
                         <div class="col" th:each="product : *{products}">
-                            <a class="text-decoration-none"
+                            <a class="text-decoration-none text-reset d-block h-100"
                                th:href="@{/product-details/{id}(id=${product.id})}">
-                                <div class="bg-light rounded-3 p-3 h-100 border border-1">
+                                <div class="rounded-3 border overflow-hidden h-100 d-flex flex-column" style="border-color: #e9efeb !important;">
                                     <img th:src="@{${product.imageUrl}}"
-                                         alt="product" class="w-100 rounded-2 object-fit-cover mb-2"
+                                         alt="product" class="w-100 object-fit-cover"
                                          style="aspect-ratio: 4/3;">
-                                    <p class="fw-semibold small text-dark mb-1"
-                                       th:text="${product.productName}"></p>
-                                    <p class="fw-bold text-success small mb-0"
-                                       th:text="|€ ${product.price}|"></p>
+                                    <div class="p-3 d-flex flex-column flex-grow-1">
+                                        <p class="fw-semibold small mb-1" style="color: #1f2a24;" th:text="${product.productName}"></p>
+                                        <p class="fw-bold text-success small mb-0 mt-auto" th:text="|€ ${product.price}|"></p>
+                                    </div>
                                 </div>
                             </a>
                         </div>
@@ -82,16 +109,14 @@
 </main>
 
 <main th:unless="${category}" class="container py-5 text-center">
-    <h4 class="text-muted">Geen geldige categorie geselecteerd.</h4>
-    <a class="btn btn-success rounded-3 mt-3" th:href="@{/home}">Terug naar overzicht</a>
+    <h4 class="text-secondary">Geen geldige categorie geselecteerd.</h4>
+    <a class="btn rounded-3 mt-3 text-white fw-semibold" style="background-color: #4a8b6f;" th:href="@{/home}">Terug naar overzicht</a>
 </main>
 
 <footer class="bg-dark text-white text-center py-4 mt-5">
     <small class="text-white-50">© 2026 Freshly — Vers aan jouw deur.</small>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
