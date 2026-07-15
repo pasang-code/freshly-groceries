@@ -1,7 +1,8 @@
 package be.thomasmore.grocerydeliverywebappspring.controllers;
 
 import be.thomasmore.grocerydeliverywebappspring.controllers.model.Product;
-import be.thomasmore.grocerydeliverywebappspring.repositories.ProductRepository;
+import be.thomasmore.grocerydeliverywebappspring.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,28 +13,14 @@ import java.util.Optional;
 @Controller
 public class ProductController {
 
-    private final ProductRepository productRepository;
-
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    @Autowired
+    ProductService productService;
 
     @GetMapping({"/product-details/{id}","/product-details"})
     public String productDetails(Model model, @PathVariable(required = false) Integer id) {
 
-        if (id==null) return "product-details";
-
-        Integer highest = productRepository.findTopByOrderByIdDesc().getId();
-        Integer lowest = productRepository.findTopByOrderByIdAsc().getId();
-
-        if (id>highest) id = lowest;
-        if (id<lowest) id = highest;
-
-        Optional<Product> product = productRepository.findById(id);
-
-        if (product.isPresent()) {
-            model.addAttribute("product", product.get());
-        }
+        Product product = productService.productSearchBehaviour(id);
+        model.addAttribute("product", product);
 
         return "product-details";
     }
