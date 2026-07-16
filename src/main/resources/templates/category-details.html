@@ -26,7 +26,7 @@
                 <li class="nav-item"><a class="nav-link rounded-2 text-dark" th:href="@{/home}" style="color: #4a8b6f;">Home</a></li>
                 <li class="nav-item"><a class="nav-link rounded-2 text-dark" href="#">Favorieten</a></li>
                 <li class="nav-item"><a sec:authorize="!isAuthenticated()" class="nav-link rounded-2 text-dark" th:href="@{/login}">Inloggen</a></li>
-                <li class="nav-item"><a sec:authorize="isAuthenticated()" class="nav-link rounded-2 text-dark" th:href="@{/logout}">Uitloggen</a></li>
+                <li class="nav-item"><a sec:authorize="isAuthenticated()" class="nav-link rounded-2 text-dark" th:href="@{/logout}">Afmelden</a></li>
                 <li class="nav-item ms-lg-2">
                     <a class="btn btn-sm fw-semibold px-3 rounded-3" style="background-color: #e3efe8; color: #2d6a4f;" th:href="@{/shopping-cart}">🛒 Winkelmandje</a>
                 </li>

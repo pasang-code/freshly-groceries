@@ -1,4 +1,4 @@
-package be.thomasmore.grocerydeliverywebappspring.service;
+package be.thomasmore.grocerydeliverywebappspring;
 
 
 import be.thomasmore.grocerydeliverywebappspring.controllers.model.Product;
@@ -30,8 +30,7 @@ public class ProductService {
         if (id > highest.getId()) return lowest;
         if (id < lowest.getId()) return highest;
 
-        // id is in a gap — jump to the next existing product upward,
-        // falling back to the nearest below
+       // JPA die de volgende grootste id-product returned
         Product next = productRepository.findTopByIdGreaterThanOrderByIdAsc(id);
         if (next != null) return next;
 

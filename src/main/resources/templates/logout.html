@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Uitloggen</title>
+    <title>Afmelden</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
@@ -27,7 +27,7 @@
                 <li class="nav-item"><a class="nav-link rounded-2 text-dark" href="#">Favorieten</a></li>
                 <li class="nav-item">
                     <a sec:authorize="!isAuthenticated()" class="nav-link rounded-2" th:href="@{/login}">Inloggen</a>
-                    <a sec:authorize="isAuthenticated()" class="nav-link rounded-2 active fw-semibold" style="color: #4a8b6f;" th:href="@{/logout}">Uitloggen</a>
+                    <a sec:authorize="isAuthenticated()" class="nav-link rounded-2 active fw-semibold" style="color: #4a8b6f;" th:href="@{/logout}">Afmelden</a>
                 </li>
                 <li class="nav-item ms-lg-2">
                     <a class="btn btn-sm fw-semibold px-3 rounded-3" style="background-color: #e3efe8; color: #2d6a4f;" th:href="@{/shopping-cart}">🛒 Winkelmandje</a>
@@ -40,18 +40,18 @@
 <section class="py-5">
     <div class="container-fluid px-3 px-md-4">
         <h1 class="fw-bold display-6" style="color: #2d6a4f;">Tot snel!</h1>
-        <p class="mt-2 mb-0 text-secondary">Weet je zeker dat je wil uitloggen?</p>
+        <p class="mt-2 mb-0 text-secondary">Weet je zeker dat je wil Afmelden?</p>
     </div>
 </section>
 
 <main class="container-fluid px-3 px-md-4 py-5 d-flex justify-content-center">
     <div style="max-width: 420px; width: 100%;">
         <div class="bg-white rounded-3 shadow-sm p-4 p-md-5 text-center">
-            <h5 class="fw-bold mb-3">Uitloggen bij Freshly</h5>
+            <h5 class="fw-bold mb-3">afmelden bij Freshly</h5>
             <p class="text-secondary mb-4">Je wordt afgemeld uit je account.</p>
 
             <form th:action="@{/logout}" method="post">
-                <button type="submit" class="btn w-100 rounded-3 fw-semibold text-white" style="background-color: #4a8b6f;">Uitloggen</button>
+                <button type="submit" class="btn w-100 rounded-3 fw-semibold text-white" style="background-color: #4a8b6f;">Afmelden</button>
                 <a th:href="@{/home}" class="btn btn-outline-secondary w-100 rounded-3 mt-2">Annuleren</a>
             </form>
         </div>

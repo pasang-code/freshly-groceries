@@ -19,8 +19,15 @@ public class ShoppingCart {
     @OneToMany(mappedBy = "cart")
     private List<CartItem> items;
 
+    @OneToOne
+    @JoinColumn(name = "username")
+    private User user;
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
