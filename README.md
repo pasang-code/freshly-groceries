@@ -1,4 +1,4 @@
-## Freshly
+![logo](images/logo.png)
 
 Een online supermarkt met thuislevering — blader door producten, vul je winkelmand en reken af. Ik bouwde dit voor het vak Advanced Programming aan Thomas More, en ontwierp het volledig voor ik één lijn code schreef — de volledige analyse vind je onderaan.
  
