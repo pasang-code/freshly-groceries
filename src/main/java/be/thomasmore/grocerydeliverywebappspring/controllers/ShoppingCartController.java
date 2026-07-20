@@ -16,15 +16,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.Optional;
 
 @Controller
 public class ShoppingCartController {
 
     @Autowired
-    private  ShoppingCartService shoppingCartService;
+    private ShoppingCartService shoppingCartService;
     @Autowired
-    private  ProductRepository productRepository;
+    private ProductRepository productRepository;
 
     @PostMapping("/shopping-cart-add")
     public String shoppingCartAddPost(@RequestParam Integer productId,
@@ -38,11 +39,11 @@ public class ShoppingCartController {
         if (!result.equals(ShoppingCartService.addProductResult.SUCCESS)) {
             Optional<Product> product = productRepository.findById(productId);
 
-
             model.addAttribute("invalidInput", true);
 
             productRepository.findById(productId)
                     .ifPresent(p -> model.addAttribute("product", p));
+
             return "product-details";
 
         }
@@ -68,11 +69,14 @@ public class ShoppingCartController {
     public String shoppingCartUpdatePost(@RequestParam String action,
                                          @RequestParam Integer itemId) {
 
+        shoppingCartService.updateCart(action, itemId);
         return "redirect:/shopping-cart";
     }
 
     @GetMapping("/shopping-cart")
     public String shoppingCart(@ModelAttribute("cart") ShoppingCart cart) {
+
+        if (cart == null) return "redirect:/login";
         return "shopping-cart";
     }
 }
