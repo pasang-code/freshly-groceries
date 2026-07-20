@@ -1,6 +1,4 @@
 package be.thomasmore.grocerydeliverywebappspring;
-
-
 import be.thomasmore.grocerydeliverywebappspring.controllers.model.CartItem;
 import be.thomasmore.grocerydeliverywebappspring.controllers.model.Product;
 import be.thomasmore.grocerydeliverywebappspring.controllers.model.ShoppingCart;
@@ -9,8 +7,6 @@ import be.thomasmore.grocerydeliverywebappspring.repositories.ProductRepository;
 import be.thomasmore.grocerydeliverywebappspring.repositories.ShoppingCartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
 import java.util.Optional;
 
 @Service
