@@ -146,11 +146,10 @@
                         <span class="fw-bold" style="font-size: 1.5rem; color: #2d6a4f;" th:text="|€ ${#numbers.formatDecimal(subtotal, 1, 2)}|">€ 0,00</span>
                     </div>
 
-                    <!-- Geen checkout-route in de huidige controller: wire dit naar je eigen route wanneer die bestaat -->
-                    <button type="button" class="btn checkout-btn text-white fw-semibold w-100 rounded-3 py-2 d-flex align-items-center justify-content-center gap-2">
+                    <a type="button" class="btn checkout-btn text-white fw-semibold w-100 rounded-3 py-2 d-flex align-items-center justify-content-center gap-2" th:href="@{/payment}">
                         Afrekenen
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
